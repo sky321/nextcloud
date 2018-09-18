@@ -43,6 +43,7 @@
     restart_policy: 'no'
     env:
       SSL_SUBJECT: "{{ fqdn }}"
+      SSL_EXPIRE:  3650
     volumes: 
       - /etc/nginx/certs:/certs
   notify: restart nginx
