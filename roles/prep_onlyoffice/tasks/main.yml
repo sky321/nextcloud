@@ -57,13 +57,14 @@
     ports:
      - "8443:443"
     env:
-      JWT_ENABLED:          'true'
-      JWT_SECRET:           "{{ lookup('password', '{{ credential_store }}/onlyoffice_secret chars=ascii_letters,digits length=32') }}"
-      SSL_CERTIFICATE_PATH: /etc/letsencrypt/live/{{ fqdn }}/fullchain.pem
-      SSL_KEY_PATH:         /etc/letsencrypt/live/{{ fqdn }}/privkey.pem
-      SSL_DHPARAM_PATH:     '{{ dhparam_path }}'
+      JWT_ENABLED:                   'true'
+      JWT_SECRET:                    "{{ lookup('password', '{{ credential_store }}/onlyoffice_secret chars=ascii_letters,digits length=32') }}"
+      SSL_CERTIFICATE_PATH:          '{{ ssl_certificate_path[ssl_certificate_type] }}'
+      SSL_KEY_PATH:                  '{{ ssl_key_path[ssl_certificate_type] }}'
+      SSL_DHPARAM_PATH:              '{{ dhparam_path }}'
+      ONLYOFFICE_HTTPS_HSTS_ENABLED: '{{ onlyoffice_https_hsts_enabled[ssl_certificate_type] }}'
     volumes:
-      - '/etc/letsencrypt:/etc/letsencrypt:ro'
+      - '{{ ssl_vol_path[ssl_certificate_type] }}:{{ ssl_vol_path[ssl_certificate_type] }}:ro'
       - '{{ dhparam_path | dirname }}:{{ dhparam_path | dirname }}:ro'
 
 - name: open ufw firewall
@@ -73,4 +74,8 @@
     ufw_rules: 
       - { port: 8443, rule: allow }
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
-
+  
+- name: set verify_peer_off {{ verify_peer_off[ssl_certificate_type] }}
+  shell: sudo -u {{ web_user[ansible_distribution] }} php occ config:system:set onlyoffice verify_peer_off --value={{ verify_peer_off[ssl_certificate_type] }}
+  args:
+    chdir: /var/www/nextcloud/

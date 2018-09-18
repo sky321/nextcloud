@@ -1,2 +1,22 @@
 ---
 # vars file for prep_onlyoffice
+
+ssl_certificate_path:
+  letsencrypt:  /etc/letsencrypt/live/{{ fqdn }}/fullchain.pem
+  selfsigned:   /etc/nginx/certs/cert.pem
+  
+ssl_key_path:
+  letsencrypt:  /etc/letsencrypt/live/{{ fqdn }}/privkey.pem
+  selfsigned:  /etc/nginx/certs/key.pem
+
+ssl_vol_path:
+  letsencrypt:  /etc/letsencrypt/live/{{ fqdn }}
+  selfsigned:  /etc/nginx/certs
+  
+onlyoffice_https_hsts_enabled:
+  letsencrypt: 'true'
+  selfsigned:  'false'
+  
+verify_peer_off:
+  letsencrypt: 'FALSE'
+  selfsigned:  'TRUE'
