@@ -10,7 +10,7 @@ ssl_key_path:
   selfsigned:  /etc/nginx/certs/key.pem
 
 ssl_vol_path:
-  letsencrypt:  /etc/letsencrypt/live/{{ fqdn }}
+  letsencrypt:  /etc/letsencrypt
   selfsigned:  /etc/nginx/certs
   
 onlyoffice_https_hsts_enabled:
