@@ -53,7 +53,7 @@
     env:
         POSTGRES_PASSWORD: "{{ lookup('password', '{{ credential_store }}/postgres_secret chars=ascii_letters,digits length=32') }}"
         POSTGRES_USER:     "{{ postgres_user }}"
-        PGDATA:            "{{ pgdata }}"
+        PGDATA:            /var/lib/postgresql/data/pgdata
     volumes: 
       - "{{ pgdata }}:/var/lib/postgresql/data/pgdata:rw"
 
