@@ -55,12 +55,12 @@
         POSTGRES_USER:     "{{ postgres_user }}"
         PGDATA:            "{{ pgdata }}"
     volumes: 
-      - "{{ pgdata }}:{{ pgdata }}:rw"
+      - "{{ pgdata }}:/var/lib/postgresql/data/pgdata:rw"
 
 - name: wait for db to come up
   wait_for:
     delay: 3
-    path: /var/lib/postgresql/data/pgdata/global
+    path: "{{ pgdata }}/global"
 
 - name: create {{ nc_db }} db
   postgresql_db:
