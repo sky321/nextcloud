@@ -1,8 +1,7 @@
----
+#!/usr/bin/env ansible-playbook
 
-- name: install onlyoffice for nextcloud
+- name: 'install onlyoffice for nextcloud'
   hosts: nextcloud
-  connection: local
   become: true
 
   roles:

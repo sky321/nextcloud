@@ -1,9 +1,9 @@
 ---
-- name: add php72 repo
+- name: add php{{ php_version | replace(".","") }} repo
   yum_repository:
-    name: remi-php72
-    description: Remi's PHP 7.2 RPM repository for Enterprise Linux {{ ansible_distribution_major_version|int }} - $basearch
-    mirrorlist: https://rpms.remirepo.net/enterprise/{{ ansible_distribution_major_version|int }}/php72/httpsmirror
+    name: remi-php{{ php_version | replace(".","") }}
+    description: Remi's PHP {{ php_version | replace(".","") }} RPM repository for Enterprise Linux {{ ansible_distribution_major_version|int }} - $basearch
+    mirrorlist: https://rpms.remirepo.net/enterprise/{{ ansible_distribution_major_version|int }}/php{{ php_version | replace(".","") }}/httpsmirror
     gpgkey: http://rpms.remirepo.net/RPM-GPG-KEY-remi
     gpgcheck: yes
     enabled: 1
@@ -38,10 +38,9 @@
       - php-cli
       - php-fpm
       - php-gd
-      - "{% if nc_db_type == 'mysql' %}php-mysql{% elif nc_db_type == 'pgsql' %}php-pgsql{% endif %}"
+      - php-{% if nc_db_type == 'mysql' %}mysqlnd{% elif nc_db_type == 'pgsql' %}pgsql{% endif %}
       - php-curl
       - php-xml
-      - php-zip
       - php-intl
       - php-mbstring
       - php-json
@@ -56,10 +55,11 @@
       - php-ldap
       - php-opcache
       - php-mcrypt
-      - php-mysqlnd
+#      - php-mysql
       - php-pear
       - php-pdo
       - php-pecl-apcu
+      - php-pecl-zip
     state: latest
 
 - name: configure php

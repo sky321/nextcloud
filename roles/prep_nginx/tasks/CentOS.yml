@@ -21,18 +21,17 @@
   yum:
     name:
       - nginx
-      - python-pip
-      - python-netaddr
       - firewalld
     state: latest
     enablerepo: nginx
 
-- name: open firewall ports 80/443
+- name: open firewall ports 22/{{ nc_web_port }}/{{ nc_ssl_port }}
   firewalld:
-    service: "{{ item }}"
+    port: "{{ item }}"
     permanent: true
+    immediate: false
     state: enabled
   with_items:
-    - http
-    - https
-    - ssh
+    - 22/tcp
+    - '{{ nc_web_port }}/tcp'
+    - '{{ nc_ssl_port }}/tcp'
