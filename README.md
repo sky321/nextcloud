@@ -59,7 +59,7 @@ sudo ./nextcloud.yml
 or
 ./nextcloud.yml -e fqdn=nc.example.org -e ssl_certificate_type=selfsigned
 or
-./nextcloud.yml -e fqdn=nc.example.org -e ssl_certificate_type=selfsigned -e nc_db_type=mysql
+./nextcloud.yml -e fqdn=nc.example.org -e ssl_certificate_type=selfsigned -e nc_db_type=pgsql
 ```
 
 > **WARNING**: Remember to update the inventory file if you want to run the playbook later again. E.g. to update the system. If you don't the defaults in the inventory file will be apply during the second run.
@@ -103,10 +103,9 @@ nc_admin             = 'admin'
 nc_passwd            = ''             # leave empty to generate random password
 
 # database settings
-# nc_db_type          = 'mysql'        # (MariaDB)
-# nc_db_host          = 'localhost'
-nc_db_type           = 'pgsql'        # (PostgreSQL)
-nc_db_host           = ''
+nc_db_type          = 'mysql'        # (MariaDB)
+# nc_db_type           = 'pgsql'        # (PostgreSQL)
+nc_db_host          = 'localhost'
 nc_db                = 'nextcloud'
 nc_db_user           = 'nextcloud'
 nc_db_passwd         = ''             # leave empty to generate random password

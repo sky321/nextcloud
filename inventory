@@ -36,8 +36,8 @@ nc_admin             = 'admin'
 nc_passwd            = ''             # leave empty to generate random password
 
 # database settings
-# nc_db_type          = 'mysql'        # (MariaDB)
-nc_db_type           = 'pgsql'        # (PostgreSQL)
+nc_db_type          = 'mysql'        # (MariaDB)
+# nc_db_type           = 'pgsql'        # (PostgreSQL)
 nc_db_host           = 'localhost'
 nc_db                = 'nextcloud'
 nc_db_user           = 'nextcloud'
@@ -65,7 +65,7 @@ php_version          = '7.3'
 talk_install         = false
 
 # Allways get the latest version of Nextcloud
-next_archive         = https://download.nextcloud.com/server/releases/latest.tar.bz2
+next_archive         = https://download.nextcloud.com/server/releases/nextcloud-16.0.8.tar.bz2
 
 # Install restic backup tool if backup_folder is not empty
 # more info about restic: https://restic.readthedocs.io/en/latest/
