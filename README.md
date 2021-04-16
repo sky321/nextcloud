@@ -20,7 +20,7 @@ Most of the settings are recommentations from C. Rieger
 
 Visit his page for all details: <https://www.c-rieger.de/>
 
-Warning: Your existing nginx/php/mariadb setup will be over written. Up to now I tested this only on newly installed AWS EC2 Ubuntu, Dedian, Fedora and CentOS machines. So backup of your existing configuration is a good advice.
+Warning: Your existing nginx/php/mariadb setup will be over written. Up to now I tested this only on newly installed AWS EC2 Ubuntu, Debian, Fedora and CentOS machines. So backup of your existing configuration is a good advice.
 
 Requirements
 ------------
@@ -160,3 +160,10 @@ install_onlyoffice    = false
 # defaults path of your generated credentials (e.g. database, talk, onlyoffice)
 credential_store      = /etc/nextcloud
 ```
+
+
+-----------------------
+
+If you find this Playbook helpful and want to donate something. Please go to this web page donate for children in need. 
+
+https://wir-fuer-kinder-in-not.org/ and click on "Spenden" (Donate)
